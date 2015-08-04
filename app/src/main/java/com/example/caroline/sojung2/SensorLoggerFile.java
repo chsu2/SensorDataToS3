@@ -1,14 +1,22 @@
 package com.example.caroline.sojung2;
 
+import android.content.Context;
+import android.content.Intent;
+import android.hardware.SensorEvent;
+import android.location.Location;
+import android.media.MediaScannerConnection;
+import android.net.Uri;
 import android.os.Environment;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import android.content.Context;
 
 /**
  * Created by Caroline on 8/4/15.
@@ -17,8 +25,8 @@ public class SensorLoggerFile {
 
     //<editor-fold desc="Logging Functions">
     // data logger
-    private boolean mLoggingEnabled;
-    private boolean mAlgoithmLastPointLogged;
+    private boolean mLoggingEnabled = false;
+    private boolean mAlgoithmLastPointLogged = false;
 
     private String latestFilename;
     /**
@@ -44,12 +52,20 @@ public class SensorLoggerFile {
 
     protected UserInfo mUserProfile;
 
-    public SensorLoggerFile(){
+    private static Context context;
+
+    public SensorLoggerFile(Context context){
 
         //assign values to the booleans
         mLoggingEnabled = false;
         mAlgoithmLastPointLogged = false;
+        this.context = context;
     }
+
+    public boolean getmLogger(){
+        return mLoggingEnabled;
+    }
+
     /**
      * Enables the data logger, opens a log file
      */
@@ -118,11 +134,11 @@ public class SensorLoggerFile {
                 // set enabled flag
                 mLoggingEnabled = true;
 
-                Toast.makeText(getApplicationContext(), "Logging Enabled", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Logging Enabled", Toast.LENGTH_SHORT).show();
 
             } catch (IOException e) {
-                Toast.makeText(this, "Error enabling logging " + e.getMessage(), Toast.LENGTH_LONG)
-                        .show();
+                //Toast.makeText(this, "Error enabling logging " + e.getMessage(), Toast.LENGTH_LONG)
+                       // .show();
             }
         }
     }
@@ -140,17 +156,16 @@ public class SensorLoggerFile {
             try {
                 f1 = mDataLogger.getFile();
                 // notify media scanner
-                sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
+                context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
                         Uri.fromFile(mDataLogger.getFile())));
 
                 // close logger
                 mDataLogger.close();
 
-                Toast.makeText(this, "Logging Disabled", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Logging Disabled", Toast.LENGTH_SHORT).show();
 
             } catch (IOException e) {
-                Toast.makeText(this, "Error disabling logging " + e.getMessage(), Toast.LENGTH_LONG)
-                        .show();
+                Toast.makeText(context, "Error disabling logging " + e.getMessage(), Toast.LENGTH_LONG).show();
             }
         }
 
@@ -160,10 +175,10 @@ public class SensorLoggerFile {
                 Environment.getExternalStoragePublicDirectory(
                         Environment.DIRECTORY_DOWNLOADS
                 ).getAbsolutePath();
-        MediaScannerConnection.scanFile(this, new String[]{dir + "/" + latestFilename}, null, null);
+        MediaScannerConnection.scanFile(context, new String[]{dir + "/" + latestFilename}, null, null);
 
 
-        Toast.makeText(this, "File written and saved bitch", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "File written and saved bitch", Toast.LENGTH_SHORT).show();
 
         //figure out what the file that is saved to the phone is called
         //try to upload the file just saved to the phone
@@ -179,7 +194,7 @@ public class SensorLoggerFile {
                 mDataLogger.log(event);
             } catch (IOException e) {
                 Toast.makeText(
-                        this, "Error logging "+ e.getMessage(),Toast.LENGTH_SHORT)
+                        context, "Error logging "+ e.getMessage(),Toast.LENGTH_SHORT)
                         .show();
             }
 
@@ -192,9 +207,7 @@ public class SensorLoggerFile {
             try {
                 mDataLogger.log(event);
             } catch (IOException e) {
-                Toast.makeText(
-                        this, "Error logging "+ e.getMessage(),Toast.LENGTH_SHORT)
-                        .show();
+                Toast.makeText(context, "Error logging "+ e.getMessage(),Toast.LENGTH_SHORT).show();
             }
 
         }
@@ -213,9 +226,7 @@ public class SensorLoggerFile {
             try {
                 mDataLogger.log(timestamp,SensorEventLogger.SENSOR_TYPE_ALGORITHM,0,vals);
             } catch (IOException e) {
-                Toast.makeText(this,
-                        "Error Logging: " + e.getMessage(),
-                        Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Error Logging: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -228,7 +239,7 @@ public class SensorLoggerFile {
             try {
                 mDataLogger.log(0L,-1,truth,new float[0]);
             } catch (IOException e) {
-                Toast.makeText(this, "Error Logging: " + s +" \r\n"+ e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Error Logging: " + s +" \r\n"+ e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
     }
