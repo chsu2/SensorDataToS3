@@ -22,14 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textOff="Record Data"
-        android:textOn="Stop Recording"
+        android:textOn="Send to Cloud"
         android:checked="false"/>
 
-   <!-- <RadioButton
-        android:id="@+id/stopData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Stop Recording"
-        android:onClick="onRadioButtonClicked"/>
--->
 </LinearLayout> 
