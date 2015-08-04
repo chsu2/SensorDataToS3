@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.caroline.sojung2" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.AppCompat.Light.DarkActionBar" >
+
+        <service android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService"
+            android:enabled="true" />
+
+        <activity
+            android:name=".MainActivity"
+            android:label="Sensor Data" >
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".DisplayMessageActivity"
+            android:label="@string/title_activity_display_message"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.caroline.sojung2.MainActivity" />
+        </activity>
+        <activity
+            android:name=".MagField"
+            android:label="@string/title_activity_mag_field"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.caroline.sojung2.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ViewAll"
+            android:label="@string/title_activity_view_all"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.caroline.sojung2.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Gyroscope"
+            android:label="@string/title_activity_gyroscope"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.caroline.sojung2.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Accelerometer2"
+            android:label="@string/title_activity_accelerometer2"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.caroline.sojung2.MainActivity" />
+        </activity>
+        <activity
+            android:name=".StepCounter"
+            android:label="@string/title_activity_step_counter" >
+        </activity>
+
+
+    </application>
+
+
+
+
+</manifest>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:paddingLeft="16dp"
+    android:paddingRight="16dp" >
+
+
+    <TextView android:id="@+id/accel"
+        android:text="Accelerometer data:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/accelData"
+        android:text=""
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/accel"/>
+
+    <TextView android:id="@+id/gyro"
+        android:text="\nGyroscope Data:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/accelData"/>
+
+    <TextView android:id="@+id/gyroData"
+        android:text=""
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/gyro"/>
+
+    <TextView android:id="@+id/mag"
+        android:text="\nMagnetic Field Data:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/gyroData"/>
+
+    <TextView android:id="@+id/magData"
+        android:text=""
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mag"/>
+
+    <ToggleButton
+        android:id="@+id/recordData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textOff="Record Data"
+        android:textOn="Stop Recording"
+        android:checked="false"/>
+
+</RelativeLayout>
