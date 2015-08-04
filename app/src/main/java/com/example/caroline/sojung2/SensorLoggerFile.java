@@ -130,11 +130,10 @@ public class SensorLoggerFile {
                 // set enabled flag
                 mLoggingEnabled = true;
 
-                //Toast.makeText(this, "Logging Enabled", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Logging Enabled", Toast.LENGTH_SHORT).show();
 
             } catch (IOException e) {
-                //Toast.makeText(this, "Error enabling logging " + e.getMessage(), Toast.LENGTH_LONG)
-                       // .show();
+                Toast.makeText(context, "Error enabling logging " + e.getMessage(), Toast.LENGTH_LONG)  .show();
             }
         }
     }

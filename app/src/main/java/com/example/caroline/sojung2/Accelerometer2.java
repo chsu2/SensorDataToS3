@@ -154,15 +154,21 @@ public class Accelerometer2 extends Activity implements SensorEventListener {
                     toast.show();
                 } else {
                     loggerFile.disableLogging();
+                    uploadActivity();
+
+
                 }
 
             }
         });
-
-        //TransferObserver observer = transferUtility.upload("chsu2","accelData", "accelData.txt" );
-
     }
 
+    public void uploadActivity(){
+
+        Intent intent = new Intent(this, UploadActivity.class);
+
+        startActivity(intent);
+    }
 
     /* Checks if external storage is available for read and write */
     public boolean isExternalStorageWritable() {

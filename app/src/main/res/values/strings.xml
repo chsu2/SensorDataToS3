@@ -28,4 +28,15 @@
     <string name="title_activity_accelerometer2">Accelerometer2</string>
     <string name="title_activity_step_counter">StepCounter</string>
 
+    <string name="title_activity_upload">UploadActivity</string>
+    <string name="upload_file">Upload a file</string>
+    <string name="upload_image">Upload an image</string>
+    <string name="pause">Pause</string>
+    <string name="resume">Resume</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="pause_all">Pause all</string>
+    <string name="cancel_all">Cancel all</string>
+
+
 </resources>
