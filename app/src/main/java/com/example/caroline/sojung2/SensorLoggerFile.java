@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import android.content.Context;
+
 /**
  * Created by Caroline on 8/4/15.
  */
@@ -116,7 +118,7 @@ public class SensorLoggerFile {
                 // set enabled flag
                 mLoggingEnabled = true;
 
-                Toast.makeText(this, "Logging Enabled", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Logging Enabled", Toast.LENGTH_SHORT).show();
 
             } catch (IOException e) {
                 Toast.makeText(this, "Error enabling logging " + e.getMessage(), Toast.LENGTH_LONG)
@@ -226,9 +228,7 @@ public class SensorLoggerFile {
             try {
                 mDataLogger.log(0L,-1,truth,new float[0]);
             } catch (IOException e) {
-                Toast.makeText(this,
-                        "Error Logging: " + s +" \r\n"+ e.getMessage(),
-                        Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Error Logging: " + s +" \r\n"+ e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
     }
