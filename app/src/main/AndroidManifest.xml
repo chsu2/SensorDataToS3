@@ -69,10 +69,6 @@
             android:name=".StepCounter"
             android:label="@string/title_activity_step_counter" >
         </activity>
-        <activity
-            android:name=".UploadActivity"
-            android:label="@string/title_activity_upload" >
-        </activity>
     </application>
 
 </manifest>

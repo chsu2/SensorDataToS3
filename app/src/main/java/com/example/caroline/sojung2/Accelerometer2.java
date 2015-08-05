@@ -60,29 +60,8 @@ public class Accelerometer2 extends Activity implements SensorEventListener {
     private ToggleButton dataRecordButton;
     private SensorLoggerFile loggerFile;
 
-    //<editor-fold desc="Logging Functions">
-    // data logger
 
-    /**
-    / The SimpleAdapter adapts the data about transfers to rows in the UI
-    private SimpleAdapter simpleAdapter;
-
-    // A List of all transfers
-    private List<TransferObserver> observers;
-
-     */
-
-    /**
-     * This map is used to provide data to the SimpleAdapter above. See the
-     * fillMap() function for how it relates observers to rows in the displayed
-     * activity.
-
-    private ArrayList<HashMap<String, Object>> transferRecordMaps;
-
-
-*/
     /** Called when the activity i first created. */
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -154,7 +133,6 @@ public class Accelerometer2 extends Activity implements SensorEventListener {
                     toast.show();
                 } else {
                     loggerFile.disableLogging();
-                    uploadActivity();
 
 
                 }
@@ -163,31 +141,6 @@ public class Accelerometer2 extends Activity implements SensorEventListener {
         });
     }
 
-    public void uploadActivity(){
-
-        Intent intent = new Intent(this, UploadActivity.class);
-
-        startActivity(intent);
-    }
-
-    /* Checks if external storage is available for read and write */
-    public boolean isExternalStorageWritable() {
-        String state = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED.equals(state)) {
-            return true;
-        }
-        return false;
-    }
-
-    /* Checks if external storage is available to at least read */
-    public boolean isExternalStorageReadable() {
-        String state = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED.equals(state) ||
-                Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
-            return true;
-        }
-        return false;
-    }
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 

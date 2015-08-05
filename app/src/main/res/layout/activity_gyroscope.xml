@@ -23,8 +23,9 @@
         android:id="@+id/recordData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/textView"
         android:textOff="Record Data"
-        android:textOn="Stop Recording"
+        android:textOn="Send to Cloud"
         android:checked="false"/>
 
 

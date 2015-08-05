@@ -178,6 +178,9 @@ public class SensorLoggerFile {
         //figure out what the file that is saved to the phone is called
         //try to upload the file just saved to the phone
 
+        UploadFile toTheCloud = new UploadFile(context);
+        toTheCloud.beginUpload(f2.getAbsolutePath());
+
         // set disabled flag
         mLoggingEnabled = false;
     }

@@ -82,17 +82,63 @@ public class ViewAll extends Activity implements SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent event) {
 
+        SensorEvent accelEvent = event;
+        SensorEvent gyroEvent = event;
+        SensorEvent magEvent = event;
+
         //interact with anything that wants to get sensor data
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER)
-            getAccelerometer(event);
+            accelEvent = event;
 
 
         if (event.sensor.getType() == Sensor.TYPE_GYROSCOPE)
-            getGyroscope(event);
+            gyroEvent = event;
 
 
         if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD)
-            getMag(event);
+            magEvent = event;
+
+        getSensors(accelEvent, gyroEvent, magEvent);
+
+    }
+
+    private void getSensors(SensorEvent event, SensorEvent event2, SensorEvent event3){
+
+        float[] values = event.values;
+
+        // Movement
+        String x = "X coordinate: " + Float.toString(values[0]) + "\n";
+        String y = "Y coordinate: " + Float.toString(values[1]) + "\n";
+        String z = "Z coordinate: " + Float.toString(values[2]) + "\n";
+
+        String coordinates = x + y + z;
+
+        accelDataText.setText(coordinates);
+
+        //gyro
+        float[] values2 = event2.values;
+
+        // Movement
+        String x2 = "X coordinate: " + Float.toString(values[0]) + "\n";
+        String y2 = "Y coordinate: " + Float.toString(values[1]) + "\n";
+        String z2 = "Z coordinate: " + Float.toString(values[2]) + "\n";
+
+        String coordinates2 = x2 + y2 + z2;
+
+        gyroDataText.setText(coordinates2);
+
+        //mag
+        float[] values3 = event3.values;
+
+        // Movement
+        String x3 = "X coordinate: " + Float.toString(values[0]) + "\n";
+        String y3 = "Y coordinate: " + Float.toString(values[1]) + "\n";
+        String z3 = "Z coordinate: " + Float.toString(values[2]) + "\n";
+
+        String coordinates3 = x3 + y3 + z3;
+
+        magDataText.setText(coordinates3);
+
 
 
     }

@@ -1,6 +1,7 @@
 package com.example.caroline.sojung2;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -14,8 +15,10 @@ import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,26 +32,25 @@ public class Gyroscope extends Activity implements SensorEventListener {
     private Sensor activeGyro;
     private SensorManager sensorManager;
     private TextView dataText;
-    //<editor-fold desc="Logging Functions">
-    // data logger
-    private boolean mLoggingEnabled =false;
-    private boolean mAlgoithmLastPointLogged =false;
+    private ToggleButton dataRecordButton;
+    private SensorLoggerFile loggerFile;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gyroscope);
+        dataText = (TextView)findViewById(R.id.textView);
+        dataRecordButton = (ToggleButton)findViewById(R.id.recordData);
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
-        dataText = (TextView)findViewById(R.id.textView);
-
-        //saving the accel to a local variable
+        //saving the gyro to a local variable
         if (sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE) != null) {
             activeGyro = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
         }
 
+        loggerFile = new SensorLoggerFile(this);
     }
 
 
@@ -98,6 +100,29 @@ public class Gyroscope extends Activity implements SensorEventListener {
         String coordinates = x + y + z;
 
         dataText.setText(coordinates);
+
+
+        if (loggerFile.getmLogger()) loggerFile.tryLogging(event);
+
+        dataRecordButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+
+                    loggerFile.enableLogging();
+
+                    Context context = getApplicationContext();
+                    CharSequence text = "I'm logging data!!!! Logging data";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                } else {
+                    loggerFile.disableLogging();
+
+                }
+            }
+        });
 
     }
     @Override
