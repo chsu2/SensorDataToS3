@@ -6,16 +6,25 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.caroline.sojung2.StepCounter">
 
-    <TextView android:id="@+id/textView"
-        android:text=""
+    <TextView
+        android:id="@+id/stepData"
+        android:text="Step Counter Data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id/collectData"
-        android:text="Collect Data"
+    <TextView android:id="@+id/textView"
+        android:text=""
+        android:layout_below="@id/stepData"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ToggleButton
+        android:id="@+id/recordData"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView"/>
+        android:layout_below="@id/textView"
+        android:textOff="Record Data"
+        android:textOn="Send to Cloud"
+        android:checked="false"/>
 
 </RelativeLayout>

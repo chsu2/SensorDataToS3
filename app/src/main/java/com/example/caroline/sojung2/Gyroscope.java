@@ -48,7 +48,8 @@ public class Gyroscope extends Activity implements SensorEventListener {
         //saving the gyro to a local variable
         if (sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE) != null) {
             activeGyro = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
-        }
+        } dataText.setText("Gyroscope sensor is not present!");
+        findViewById(R.id.recordData).setVisibility(View.GONE);
 
         loggerFile = new SensorLoggerFile(this);
     }
@@ -125,6 +126,7 @@ public class Gyroscope extends Activity implements SensorEventListener {
         });
 
     }
+
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 

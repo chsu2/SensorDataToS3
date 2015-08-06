@@ -73,9 +73,13 @@ public class Accelerometer2 extends Activity implements SensorEventListener {
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
         //saving the accel to a local variable
-        if (sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null)
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null) {
             activeAccel = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        } else {
+            dataText.setText("Accelerometer" + " is not present!");
+            findViewById(R.id.recordData).setVisibility(View.GONE);
 
+        }
         loggerFile = new SensorLoggerFile(this);
 
         //check to see what sensors are enabled after declaring sensorManager
@@ -99,7 +103,7 @@ public class Accelerometer2 extends Activity implements SensorEventListener {
             getAccelerometer(event);
         } else {
             dataText.setText("No Accelerometer present!");
-            findViewById(R.id.collectData).setVisibility(View.GONE);
+            findViewById(R.id.recordData).setVisibility(View.GONE);
         }
 
     }
@@ -116,6 +120,7 @@ public class Accelerometer2 extends Activity implements SensorEventListener {
 
         dataText.setText(coordinates);
 
+        //can potentially move this line into the button clicking event
         if (loggerFile.getmLogger()) loggerFile.tryLogging(event);
 
         dataRecordButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

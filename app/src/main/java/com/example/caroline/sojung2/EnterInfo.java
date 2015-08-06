@@ -1,40 +1,26 @@
 package com.example.caroline.sojung2;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
+import android.view.View;
 
-//second window that pops up when the text is entered
-
-public class DisplayMessageActivity extends AppCompatActivity {
+public class EnterInfo extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        //getIntent() retrieves the data contained within the intent
         super.onCreate(savedInstanceState);
-
-        //get the message from  the intent
-        Intent intent = getIntent();
-        String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
-
-        //create the text view
-
-        TextView textView = new TextView(this);
-        textView.setTextSize(40);
-        textView.setText(message);
-
-        //add the TextView as the root view of the activity's layout by passing it to setContentView()
-        //set the text view as the activity layout
-        setContentView(textView);
-
+        setContentView(R.layout.activity_enter_info);
     }
 
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_enter_info, menu);
+        return true;
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -49,5 +35,13 @@ public class DisplayMessageActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void sensorChoice(View view){
+
+        Intent intent = new Intent(this, MainActivity.class);
+
+        startActivity(intent);
+
     }
 }

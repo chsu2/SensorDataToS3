@@ -1,6 +1,7 @@
 package com.example.caroline.sojung2;
 
 import android.app.Activity;
+import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -9,7 +10,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ToggleButton;
 
 
 public class ViewAll extends Activity implements SensorEventListener {
@@ -25,6 +30,13 @@ public class ViewAll extends Activity implements SensorEventListener {
     private Sensor mag;
     private TextView magDataText;
 
+    private Sensor step;
+    private TextView stepText;
+
+    private ToggleButton dataRecordButton;
+    private SensorLoggerFile loggerFile;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,8 +47,13 @@ public class ViewAll extends Activity implements SensorEventListener {
         accelDataText = (TextView)findViewById(R.id.accelData);
         gyroDataText = (TextView)findViewById(R.id.gyroData);
         magDataText = (TextView)findViewById(R.id.magData);
+        stepText = (TextView)findViewById(R.id.stepData);
 
-        //saving the accel to a local variable
+        loggerFile = new SensorLoggerFile(this);
+        dataRecordButton = (ToggleButton)findViewById(R.id.recordData);
+
+
+        //saving the sensors to local variables
         if (sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null) {
             accel = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         } else {
@@ -55,7 +72,15 @@ public class ViewAll extends Activity implements SensorEventListener {
             magDataText.setText("Magnetic Field Sensor is not present!");
         }
 
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null) {
+            step = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+        } else {
+            stepText.setText("Step counter is not present!");
+        }
+
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -82,66 +107,27 @@ public class ViewAll extends Activity implements SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent event) {
 
-        SensorEvent accelEvent = event;
-        SensorEvent gyroEvent = event;
-        SensorEvent magEvent = event;
-
         //interact with anything that wants to get sensor data
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER)
-            accelEvent = event;
+            getAccelerometer(event);
+
 
 
         if (event.sensor.getType() == Sensor.TYPE_GYROSCOPE)
-            gyroEvent = event;
+            getGyroscope(event);
+
 
 
         if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD)
-            magEvent = event;
+            getMag(event);
 
-        getSensors(accelEvent, gyroEvent, magEvent);
-
-    }
-
-    private void getSensors(SensorEvent event, SensorEvent event2, SensorEvent event3){
-
-        float[] values = event.values;
-
-        // Movement
-        String x = "X coordinate: " + Float.toString(values[0]) + "\n";
-        String y = "Y coordinate: " + Float.toString(values[1]) + "\n";
-        String z = "Z coordinate: " + Float.toString(values[2]) + "\n";
-
-        String coordinates = x + y + z;
-
-        accelDataText.setText(coordinates);
-
-        //gyro
-        float[] values2 = event2.values;
-
-        // Movement
-        String x2 = "X coordinate: " + Float.toString(values[0]) + "\n";
-        String y2 = "Y coordinate: " + Float.toString(values[1]) + "\n";
-        String z2 = "Z coordinate: " + Float.toString(values[2]) + "\n";
-
-        String coordinates2 = x2 + y2 + z2;
-
-        gyroDataText.setText(coordinates2);
-
-        //mag
-        float[] values3 = event3.values;
-
-        // Movement
-        String x3 = "X coordinate: " + Float.toString(values[0]) + "\n";
-        String y3 = "Y coordinate: " + Float.toString(values[1]) + "\n";
-        String z3 = "Z coordinate: " + Float.toString(values[2]) + "\n";
-
-        String coordinates3 = x3 + y3 + z3;
-
-        magDataText.setText(coordinates3);
+        if (event.sensor.getType() == Sensor.TYPE_STEP_COUNTER)
+            getStep(event);
 
 
 
     }
+
 
     private void getAccelerometer(SensorEvent event) {
         float[] values = event.values;
@@ -154,6 +140,31 @@ public class ViewAll extends Activity implements SensorEventListener {
         String coordinates = x + y + z;
 
         accelDataText.setText(coordinates);
+
+
+        if (loggerFile.getmLogger()) loggerFile.tryLogging(event);
+
+        dataRecordButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+
+                    loggerFile.enableLogging();
+
+                    Context context = getApplicationContext();
+                    CharSequence text = "I'm logging data!!!! Logging data";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                } else {
+                    loggerFile.disableLogging();
+
+
+                }
+
+            }
+        });
 
     }
 
@@ -169,6 +180,31 @@ public class ViewAll extends Activity implements SensorEventListener {
 
         gyroDataText.setText(coordinates);
 
+        if (loggerFile.getmLogger()) loggerFile.tryLogging(event);
+
+        dataRecordButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+
+                    loggerFile.enableLogging();
+
+                    Context context = getApplicationContext();
+                    CharSequence text = "I'm logging data!!!! Logging data";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                } else {
+                    loggerFile.disableLogging();
+
+
+                }
+
+            }
+        });
+
+
     }
 
     private void getMag(SensorEvent event) {
@@ -182,6 +218,67 @@ public class ViewAll extends Activity implements SensorEventListener {
         String coordinates = x + y + z;
 
         magDataText.setText(coordinates);
+
+        if (loggerFile.getmLogger()) loggerFile.tryLogging(event);
+
+        dataRecordButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+
+                    loggerFile.enableLogging();
+
+                    Context context = getApplicationContext();
+                    CharSequence text = "I'm logging data!!!! Logging data";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                } else {
+                    loggerFile.disableLogging();
+
+
+                }
+
+            }
+        });
+
+
+    }
+
+    private void getStep(SensorEvent event) {
+        float[] values = event.values;
+
+        // Movement
+        String steps = "Number of Steps: " + Float.toString(values[0]) + "\n";
+
+        String numSteps = "Step Counter Data:\n" + steps;
+
+        stepText.setText(numSteps);
+
+        if (loggerFile.getmLogger()) loggerFile.tryLogging(event);
+
+        dataRecordButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+
+                    loggerFile.enableLogging();
+
+                    Context context = getApplicationContext();
+                    CharSequence text = "I'm logging data!!!! Logging data";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                } else {
+                    loggerFile.disableLogging();
+
+
+                }
+
+            }
+        });
 
     }
 

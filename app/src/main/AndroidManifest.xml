@@ -69,6 +69,10 @@
             android:name=".StepCounter"
             android:label="@string/title_activity_step_counter" >
         </activity>
+        <activity
+            android:name=".EnterInfo"
+            android:label="@string/title_activity_enter_info" >
+        </activity>
     </application>
 
 </manifest>

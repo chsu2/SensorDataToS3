@@ -40,13 +40,27 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/mag"/>
 
+    <TextView
+        android:id="@+id/step"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="\nStep Counter Data"
+        android:layout_below="@id/magData"/>
+
+    <TextView
+        android:id="@+id/stepData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_below="@id/step"/>
+
     <ToggleButton
         android:id="@+id/recordData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/magData"
+        android:layout_below="@id/stepData"
         android:textOff="Record Data"
-        android:textOn="Stop Recording"
+        android:textOn="Send to Cloud"
         android:checked="false"/>
 
 </RelativeLayout>

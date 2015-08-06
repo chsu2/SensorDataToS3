@@ -47,6 +47,9 @@ public class MagField extends Activity implements SensorEventListener {
         //saving the magfield to a local variable
         if (sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null) {
             activeMag = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+        } else {
+            dataText.setText("Magnetic field sensor is not present!");
+            findViewById(R.id.recordData).setVisibility(View.GONE);
         }
 
         loggerFile = new SensorLoggerFile(this);
@@ -84,7 +87,7 @@ public class MagField extends Activity implements SensorEventListener {
             getMag(event);
         }else {
             dataText.setText("Magnetic Field sensor is not present!");
-            findViewById(R.id.collectData).setVisibility(View.GONE);
+            findViewById(R.id.recordData).setVisibility(View.GONE);
         }
 
     }

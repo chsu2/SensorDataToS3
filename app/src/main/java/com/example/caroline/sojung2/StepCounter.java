@@ -1,6 +1,7 @@
 package com.example.caroline.sojung2;
 
 import android.app.Activity;
+import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -9,7 +10,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ToggleButton;
 
 
 public class StepCounter extends Activity implements SensorEventListener {
@@ -17,23 +21,27 @@ public class StepCounter extends Activity implements SensorEventListener {
     private Sensor activeStepCounter;
     private SensorManager sensorManager;
     private TextView dataText;
+    private ToggleButton dataRecordButton;
+    private SensorLoggerFile loggerFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_step_counter);
+        dataText = (TextView)findViewById(R.id.textView);
+        dataRecordButton = (ToggleButton)findViewById(R.id.recordData);
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
-        dataText = (TextView)findViewById(R.id.textView);
-
-        //saving the accel to a local variable
+        //saving the stepCounter to a local variable
         if (sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null) {
             activeStepCounter = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
         } else {
             dataText.setText("Step counter is not present!");
-            findViewById(R.id.collectData).setVisibility(View.GONE);
+            findViewById(R.id.recordData).setVisibility(View.GONE);
         }
+
+        loggerFile = new SensorLoggerFile(this);
 
     }
 
@@ -78,6 +86,30 @@ public class StepCounter extends Activity implements SensorEventListener {
         String numSteps = "Step Counter Data:\n" + steps;
 
         dataText.setText(numSteps);
+
+        if (loggerFile.getmLogger()) loggerFile.tryLogging(event);
+
+        dataRecordButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+
+                    loggerFile.enableLogging();
+
+                    Context context = getApplicationContext();
+                    CharSequence text = "I'm logging data!!!! Logging data";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                } else {
+                    loggerFile.disableLogging();
+
+
+                }
+
+            }
+        });
 
     }
     @Override

@@ -67,18 +67,6 @@ public class MainActivity extends AppCompatActivity {
       //  }
  //   }
 
-    public void sendMessage(View view) {
-
-        //retrieves the inputted string after the send button is hit
-
-        Intent intent = new Intent(this, DisplayMessageActivity.class);
-        EditText editText = (EditText) findViewById(R.id.textbox1);
-
-        String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
-
-        startActivity(intent);
-    }
 
     public void accelerometer(View view){
 

@@ -1,7 +1,7 @@
 package com.example.caroline.sojung2;
 
 /**
- * Created by Caroline on 7/29/15.
+ * edited by Caroline on 7/29/15.
  */
 import java.util.ArrayList;
 
