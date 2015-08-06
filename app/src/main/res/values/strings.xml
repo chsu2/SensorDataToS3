@@ -27,6 +27,7 @@
     <string name="title_activity_gyroscope">Gyroscope</string>
     <string name="title_activity_accelerometer2">Accelerometer2</string>
     <string name="title_activity_step_counter">StepCounter</string>
+    <string name="title_activity_enter_info">Enter Info</string>
 
     <string-array name="gender_array">
         <item>Male</item>
