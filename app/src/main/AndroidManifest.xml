@@ -16,22 +16,23 @@
             android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService"
             android:enabled="true" />
 
+
         <activity
-            android:name=".MainActivity"
-            android:label="Sensor Data" >
+            android:name=".EnterInfo"
+            android:label="@string/title_activity_enter_info" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".DisplayMessageActivity"
-            android:label="@string/title_activity_display_message"
-            android:parentActivityName=".MainActivity" >
+            android:name=".MainActivity"
+            android:label="Sensor Data" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.caroline.sojung2.MainActivity" />
+                android:value="com.example.caroline.sojung2.EnterInfo" />
         </activity>
         <activity
             android:name=".MagField"
@@ -69,10 +70,7 @@
             android:name=".StepCounter"
             android:label="@string/title_activity_step_counter" >
         </activity>
-        <activity
-            android:name=".EnterInfo"
-            android:label="@string/title_activity_enter_info" >
-        </activity>
+
     </application>
 
 </manifest>
