@@ -50,6 +50,15 @@ public class SensorLoggerFile {
 
     private static Context context;
 
+    public SensorLoggerFile(Context context){
+
+        //assign values to the booleans
+        mLoggingEnabled = false;
+        mAlgoithmLastPointLogged = false;
+        this.context = context;
+
+    }
+
     public SensorLoggerFile(Context context, UserInfo user){
 
         //assign values to the booleans
@@ -175,7 +184,7 @@ public class SensorLoggerFile {
         MediaScannerConnection.scanFile(context, new String[]{dir + "/" + latestFilename}, null, null);
 
 
-        Toast.makeText(context, "File written and saved bitch", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "File written", Toast.LENGTH_SHORT).show();
 
         //figure out what the file that is saved to the phone is called
         //try to upload the file just saved to the phone

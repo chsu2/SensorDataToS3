@@ -59,6 +59,14 @@
         <item>11</item>
     </string-array>
 
-
+    <string-array name="activity_array">
+        <item>Walking</item>
+        <item>Jogging</item>
+        <item>Running</item>
+        <item>Skipping</item>
+        <item>Eating</item>
+        <item>Crying</item>
+        <item>Pooping</item>
+    </string-array>
 
 </resources>

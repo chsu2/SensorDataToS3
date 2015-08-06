@@ -98,7 +98,7 @@
 
             <TextView
                 android:id="@+id/weight"
-                android:text="Weight:"
+                android:text="\nWeight:"
                 android:textSize="18dp"
                 android:textStyle="bold"
                 android:layout_below="@id/inches"
@@ -107,27 +107,30 @@
 
             <Spinner
                 android:id="@+id/weightSelect"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/weight"></Spinner>
 
     <TextView
         android:text="pounds"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/weightSelect"
+        android:layout_below="@id/weight"/>
 
-    <!--
+
             <TextView
                 android:id="@+id/activity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Activity:"
+                android:text="\nActivity:"
                 android:textSize="18dp"
+                android:textStyle="bold"
                 android:layout_below="@id/weightSelect"/>
 
             <Spinner
                 android:id="@+id/activitySelect"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/activity"></Spinner>
 
@@ -137,8 +140,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/activitySelect"
                 android:onClick="sensorChoice"/>
-
-        -->
 
 
 </RelativeLayout>

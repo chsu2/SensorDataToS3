@@ -7,14 +7,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 public class EnterInfo extends AppCompatActivity {
 
+    private EditText name;
     private Spinner gender;
     private Spinner age;
     private Spinner feet;
     private Spinner inches;
+    private Spinner weight;
+    private Spinner activity;
 
     protected UserInfo userInput;
 
@@ -25,6 +29,9 @@ public class EnterInfo extends AppCompatActivity {
 
         userInput = new UserInfo();
 
+        //name
+        name = (EditText)findViewById(R.id.enterName);
+
         //gender spinner
         gender = (Spinner)findViewById(R.id.genderSelect);
         ArrayAdapter<CharSequence> genderAdapter = ArrayAdapter.createFromResource(this, R.array.gender_array,
@@ -34,7 +41,6 @@ public class EnterInfo extends AppCompatActivity {
 
         //age array
         String[] ageValues = new String[99];
-
         for (int i = 0; i < 99; i++) ageValues[i] = Integer.toString(i + 1);
 
 
@@ -60,8 +66,24 @@ public class EnterInfo extends AppCompatActivity {
         inchAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         inches.setAdapter(inchAdapter);
 
-        //Weight spinner
+        //weight array
+        String[] weightValues = new String[250];
+        for (int i = 0; i < 250; i++) weightValues[i] = Integer.toString(i + 50);
 
+
+        //Weight spinner
+        weight = (Spinner)findViewById(R.id.weightSelect);
+        ArrayAdapter<String> weightAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, weightValues);
+        weightAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        weight.setAdapter(weightAdapter);
+
+        //activity spinner
+        activity = (Spinner)findViewById(R.id.activitySelect);
+        ArrayAdapter<CharSequence> activityAdapter = ArrayAdapter.createFromResource(this, R.array.activity_array,
+                android.R.layout.simple_spinner_item);
+        activityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        activity.setAdapter(activityAdapter);
 
     }
 
@@ -89,7 +111,18 @@ public class EnterInfo extends AppCompatActivity {
 
     public void sensorChoice(View view){
 
+        userInput.setName(name.getText().toString());
+        userInput.setGender(gender.getSelectedItem().toString());
+        userInput.setAge(age.getSelectedItem().toString());
+        userInput.setHeightIn(inches.getSelectedItem().toString());
+        userInput.setHeightFt(feet.getSelectedItem().toString());
+        userInput.setWeight(weight.getSelectedItem().toString());
+        userInput.setActivity(activity.getSelectedItem().toString());
+
         Intent intent = new Intent(this, MainActivity.class);
+
+        //transferring the userInfo object
+        intent.putExtra("userInput", userInput);
 
         startActivity(intent);
 

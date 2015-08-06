@@ -48,6 +48,10 @@ public class SensorEventLogger extends DataWriter {
         log(event.timestamp, event.sensor.getType(), 0, event.values);
     }
 
+
+/*****************************
+ * edit this logging function*/
+
     public void log(long ts, int sensorType, int accuracy, float[] values) throws IOException {
         sStringBuilder.setLength(0);
 
@@ -73,6 +77,9 @@ public class SensorEventLogger extends DataWriter {
         }
         writeln(sStringBuilder.toString());
     }
+
+    /**********************************/
+
     public void log(Location location) throws IOException {
         sStringBuilder.setLength(0);
 
