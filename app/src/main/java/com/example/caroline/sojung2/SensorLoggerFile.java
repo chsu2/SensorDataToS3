@@ -50,12 +50,14 @@ public class SensorLoggerFile {
 
     private static Context context;
 
-    public SensorLoggerFile(Context context){
+    public SensorLoggerFile(Context context, UserInfo user){
 
         //assign values to the booleans
         mLoggingEnabled = false;
         mAlgoithmLastPointLogged = false;
         this.context = context;
+
+        mUserProfile = user;
     }
 
     public boolean getmLogger(){

@@ -53,20 +53,6 @@ public class MainActivity extends AppCompatActivity {
         //original **
         }
 
-        //handle presses on the action bar items
-        //switch (item.getItemId()) {
-
-           // case R.id.action_search:
-             //   openSearch();
-             //   return true;
-           // case R.id.action_settings:
-           //     openSettings();
-           //     return true;
-         //   default:
-            //    return super.onOptionsItemSelected(item);
-      //  }
- //   }
-
 
     public void accelerometer(View view){
 
@@ -82,11 +68,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-   // public void light(View view){
-
-    //    Intent intent = new Intent(this, Light.class);
-      //  startActivity(intent);
-    //}
 
     public void magField(View view){
 
@@ -94,11 +75,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-   // public void temperature(View view){
-
-    //    Intent intent = new Intent(this, Temperature.class);
-      //  startActivity(intent);
-    //}
 
     public void stepCounter(View view){
 

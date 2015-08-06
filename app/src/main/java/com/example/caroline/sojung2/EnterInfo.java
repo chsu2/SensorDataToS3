@@ -6,13 +6,63 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 public class EnterInfo extends AppCompatActivity {
+
+    private Spinner gender;
+    private Spinner age;
+    private Spinner feet;
+    private Spinner inches;
+
+    protected UserInfo userInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_info);
+
+        userInput = new UserInfo();
+
+        //gender spinner
+        gender = (Spinner)findViewById(R.id.genderSelect);
+        ArrayAdapter<CharSequence> genderAdapter = ArrayAdapter.createFromResource(this, R.array.gender_array,
+                android.R.layout.simple_spinner_item);
+        genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        gender.setAdapter(genderAdapter);
+
+        //age array
+        String[] ageValues = new String[99];
+
+        for (int i = 0; i < 99; i++) ageValues[i] = Integer.toString(i + 1);
+
+
+        //age spinners
+        age = (Spinner)findViewById(R.id.ageSelect);
+        ArrayAdapter<String> ageAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, ageValues);
+        ageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        age.setAdapter(ageAdapter);
+
+
+        //height spinners
+        feet = (Spinner)findViewById(R.id.feet);
+        inches = (Spinner)findViewById(R.id.inches);
+
+        ArrayAdapter<CharSequence> feetAdapter = ArrayAdapter.createFromResource(this, R.array.feet_array,
+                android.R.layout.simple_spinner_item);
+        feetAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        feet.setAdapter(feetAdapter);
+
+        ArrayAdapter<CharSequence> inchAdapter = ArrayAdapter.createFromResource(this, R.array.inch_array,
+                android.R.layout.simple_spinner_item);
+        inchAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        inches.setAdapter(inchAdapter);
+
+        //Weight spinner
+
+
     }
 
     @Override

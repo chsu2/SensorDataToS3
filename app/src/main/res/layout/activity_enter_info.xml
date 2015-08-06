@@ -10,6 +10,7 @@
        android:id="@+id/name"
        android:text="Name:"
        android:textSize="18dp"
+       android:textStyle="bold"
        android:layout_width="match_parent"
        android:layout_height="wrap_content" />
 
@@ -22,88 +23,122 @@
 
     <TextView
         android:id="@+id/gender"
-        android:text="Gender:"
+        android:text="\nGender:"
         android:textSize="18dp"
+        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/enterName"/>
 
     <Spinner
         android:id="@+id/genderSelect"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/gender"></Spinner>
 
+        <TextView
+            android:id="@+id/age"
+            android:text="\nAge:"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/genderSelect"/>
+
+        <Spinner
+            android:id="@+id/ageSelect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/age"></Spinner>
+
+
     <TextView
-        android:id="@+id/age"
-        android:text="Age:"
-        android:textSize="18dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/genderSelect"/>
-
-    <Spinner
-        android:id="@+id/ageSelect"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/age"></Spinner>
-
-    <TextView
-        android:id="@+id/height"
-        android:text="Height:"
-        android:textSize="18dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/ageSelect"/>
-
-    <Spinner
-        android:id="@+id/feet"
+        android:text="years"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/height"></Spinner>
+        android:layout_toRightOf="@id/ageSelect"
+        android:layout_below="@id/age"/>
 
-    <Spinner
-        android:id="@+id/inches"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/height"
-        android:layout_toRightOf="@id/feet"></Spinner>
+            <TextView
+                android:id="@+id/height"
+                android:text="\nHeight:"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ageSelect"/>
+
+            <Spinner
+                android:id="@+id/feet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/height"></Spinner>
 
     <TextView
-        android:id="@+id/weight"
-        android:text="Weight:"
-        android:textSize="18dp"
-        android:layout_width="match_parent"
+        android:id="@+id/feetText"
+        android:text=" feet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/feet"
+        android:layout_below="@id/height"/>
+
+            <Spinner
+                android:id="@+id/inches"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/height"
+                android:layout_toRightOf="@id/feetText"></Spinner>
+
+    <TextView
+        android:text=" inches"
+        android:layout_toRightOf="@id/inches"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/height"/>
+
+            <TextView
+                android:id="@+id/weight"
+                android:text="Weight:"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_below="@id/inches"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Spinner
+                android:id="@+id/weightSelect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/weight"></Spinner>
+
+    <TextView
+        android:text="pounds"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <Spinner
-        android:id="@+id/weightSelect"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/weight"></Spinner>
+    <!--
+            <TextView
+                android:id="@+id/activity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Activity:"
+                android:textSize="18dp"
+                android:layout_below="@id/weightSelect"/>
 
-    <TextView
-        android:id="@+id/activity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Activity:"
-        android:textSize="18dp"
-        android:layout_below="@id/weightSelect"/>
+            <Spinner
+                android:id="@+id/activitySelect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity"></Spinner>
 
-    <Spinner
-        android:id="@+id/activitySelect"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/activity"></Spinner>
+            <Button
+                android:text="Enter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activitySelect"
+                android:onClick="sensorChoice"/>
 
-    <Button
-        android:text="Enter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/activitySelect"
-        android:onClick="sensorChoice"/>
-
-
+        -->
 
 
 </RelativeLayout>
