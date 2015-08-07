@@ -10,8 +10,12 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+/** allows the user to input their personal information
+ *
+ */
 public class EnterInfo extends AppCompatActivity {
 
+    //instance variables
     private EditText name;
     private Spinner gender;
     private Spinner age;
@@ -111,6 +115,8 @@ public class EnterInfo extends AppCompatActivity {
 
     public void sensorChoice(View view){
 
+        /*fills the userInput object with the information the
+        user filled out */
         userInput.setName(name.getText().toString());
         userInput.setGender(gender.getSelectedItem().toString());
         userInput.setAge(age.getSelectedItem().toString());
@@ -121,8 +127,16 @@ public class EnterInfo extends AppCompatActivity {
 
         Intent intent = new Intent(this, MainActivity.class);
 
-        //transferring the userInfo object
+        //transferring the userInfo object to the MainActivity class
         intent.putExtra("userInput", userInput);
+
+        intent.putExtra("name", name.getText().toString());
+        intent.putExtra("gender", gender.getSelectedItem().toString());
+        intent.putExtra("age", age.getSelectedItem().toString());
+        intent.putExtra("inches", inches.getSelectedItem().toString());
+        intent.putExtra("feet", feet.getSelectedItem().toString());
+        intent.putExtra("weight", weight.getSelectedItem().toString());
+        intent.putExtra("activity", activity.getSelectedItem().toString());
 
         startActivity(intent);
 

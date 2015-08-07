@@ -23,6 +23,7 @@ public class StepCounter extends Activity implements SensorEventListener {
     private TextView dataText;
     private ToggleButton dataRecordButton;
     private SensorLoggerFile loggerFile;
+    private UserInfo user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,8 @@ public class StepCounter extends Activity implements SensorEventListener {
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
+        user = getIntent().getParcelableExtra("user");
+
         //saving the stepCounter to a local variable
         if (sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null) {
             activeStepCounter = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
@@ -41,7 +44,7 @@ public class StepCounter extends Activity implements SensorEventListener {
             findViewById(R.id.recordData).setVisibility(View.GONE);
         }
 
-        loggerFile = new SensorLoggerFile(this);
+        loggerFile = new SensorLoggerFile(this, user);
 
     }
 

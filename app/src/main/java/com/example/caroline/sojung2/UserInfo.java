@@ -51,6 +51,8 @@ public class UserInfo implements Parcelable {
         setEmail("");
     }
 
+
+
     /**
      * Retrieving UserInfo data from Parcel object
      * This constructor is invoked by the method
@@ -81,9 +83,9 @@ public class UserInfo implements Parcelable {
         this.setWeight(UI.getWeight());
         this.setGender(UI.getGender());
         this.setHeightIn(UI.getHeightIn());
-        this.setLastLogFile(UI.getLastLogFile());
+        //this.setLastLogFile(UI.getLastLogFile());
         this.setLogFiles(UI.getLogFiles());
-        //this.setEmail(UI.getEmail());
+        this.setEmail(UI.getEmail());
         if (extraItems != null) {
             for (String s : UI.getExtras()) {
                 this.addExtra(s);

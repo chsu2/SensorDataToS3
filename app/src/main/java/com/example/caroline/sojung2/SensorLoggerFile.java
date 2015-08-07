@@ -115,6 +115,7 @@ public class SensorLoggerFile {
                                 Integer.parseInt(mUserProfile.getHeightFt())*12
                                         + Integer.parseInt(mUserProfile.getHeightIn());
 
+                        header = mUserProfile.getName();
                         userGender = mUserProfile.getGender();
                         userHeight = String.format("%d",height);
                         userWeight = mUserProfile.getWeight();

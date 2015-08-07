@@ -2,54 +2,24 @@ package com.example.caroline.sojung2;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.location.Location;
-import android.media.MediaScannerConnection;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.amazonaws.*;
-import android.os.Environment;
-
-
-import com.amazonaws.auth.CognitoCachingCredentialsProvider;
-import com.amazonaws.regions.Regions;
-import com.amazonaws.services.s3.AmazonS3Client;
-
-import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
-import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
-import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener;
-import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
-import com.amazonaws.mobileconnectors.s3.transferutility.TransferType;
-
-import com.amazonaws.services.s3.internal.Constants;
-
-
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import android.widget.ToggleButton;
 
 
-
+/**Displays the data from the accelerometer and allows
+ * the user to record the data to a file. The file then
+ * saves locally in the "Downloads" folder of the phone
+ * and also sends a copy to an S3 bucket.
+ */
 public class Accelerometer2 extends Activity implements SensorEventListener {
 
 
@@ -80,7 +50,10 @@ public class Accelerometer2 extends Activity implements SensorEventListener {
             findViewById(R.id.recordData).setVisibility(View.GONE);
 
         }
-        loggerFile = new SensorLoggerFile(this);
+
+        UserInfo user = getIntent().getParcelableExtra("user");
+
+        loggerFile = new SensorLoggerFile(this, user);
 
         //check to see what sensors are enabled after declaring sensorManager
         //keep local copy of sensor trying to use. use getDefaultSensor method that will retrieve a copy of sensor class to access members

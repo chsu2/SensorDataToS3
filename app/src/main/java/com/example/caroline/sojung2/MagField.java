@@ -33,6 +33,7 @@ public class MagField extends Activity implements SensorEventListener {
     private TextView dataText;
     private ToggleButton dataRecordButton;
     private SensorLoggerFile loggerFile;
+    //private UserInfo user;
 
 
     @Override
@@ -43,6 +44,8 @@ public class MagField extends Activity implements SensorEventListener {
         dataRecordButton = (ToggleButton)findViewById(R.id.recordData);
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+
+       // user = getIntent().getParcelableExtra("user");
 
         //saving the magfield to a local variable
         if (sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null) {

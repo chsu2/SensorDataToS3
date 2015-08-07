@@ -36,6 +36,8 @@ public class ViewAll extends Activity implements SensorEventListener {
     private ToggleButton dataRecordButton;
     private SensorLoggerFile loggerFile;
 
+    //private UserInfo user;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +50,12 @@ public class ViewAll extends Activity implements SensorEventListener {
         gyroDataText = (TextView)findViewById(R.id.gyroData);
         magDataText = (TextView)findViewById(R.id.magData);
         stepText = (TextView)findViewById(R.id.stepData);
+        //user = getIntent().getParcelableExtra("user");
 
         loggerFile = new SensorLoggerFile(this);
         dataRecordButton = (ToggleButton)findViewById(R.id.recordData);
+
+
 
 
         //saving the sensors to local variables
