@@ -13,6 +13,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+import android.content.Intent;
 
 
 /**Displays the data from the accelerometer and allows
@@ -29,6 +30,7 @@ public class Accelerometer2 extends Activity implements SensorEventListener {
     private TextView dataText;
     private ToggleButton dataRecordButton;
     private SensorLoggerFile loggerFile;
+    //private Intent intent;
 
 
     /** Called when the activity i first created. */
@@ -51,9 +53,13 @@ public class Accelerometer2 extends Activity implements SensorEventListener {
 
         }
 
-        UserInfo user = getIntent().getParcelableExtra("user");
+        //UserInfo user = intent.getParcelableExtra("user");
+        loggerFile = new SensorLoggerFile(this);
+        //intent = getIntent();
 
-        loggerFile = new SensorLoggerFile(this, user);
+
+
+
 
         //check to see what sensors are enabled after declaring sensorManager
         //keep local copy of sensor trying to use. use getDefaultSensor method that will retrieve a copy of sensor class to access members
@@ -92,6 +98,7 @@ public class Accelerometer2 extends Activity implements SensorEventListener {
         String coordinates = x + y + z;
 
         dataText.setText(coordinates);
+
 
         //can potentially move this line into the button clicking event
         if (loggerFile.getmLogger()) loggerFile.tryLogging(event);

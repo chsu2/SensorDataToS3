@@ -36,16 +36,17 @@ public class MainActivity extends AppCompatActivity {
 
         inflater.inflate(R.menu.main_activity_actions, menu);
 
-        Intent i = getIntent();
+        //Intent i = getIntent();
+        //user1 = i.getParcelableExtra("userInput");
 
-        user1 = new UserInfo();
+        /*user1 = new UserInfo();
         user1.setName(i.getStringExtra("name"));
         user1.setGender(i.getStringExtra("gender"));
         user1.setAge(i.getStringExtra("age"));
         user1.setHeightFt(i.getStringExtra("feet"));
         user1.setHeightIn(i.getStringExtra("inches"));
         user1.setWeight(i.getStringExtra("weight"));
-        user1.setActivity(i.getStringExtra("activity"));
+        user1.setActivity(i.getStringExtra("activity"));*/
 
         //get the user object from enterInfo class
         //user1 = getIntent().getParcelableExtra("userInput");
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
     public void accelerometer(View view){
 
         Intent intent = new Intent(this, Accelerometer2.class);
-        intent.putExtra("user", user1);
+        //intent.putExtra("user", user1);
 
         startActivity(intent);
 
