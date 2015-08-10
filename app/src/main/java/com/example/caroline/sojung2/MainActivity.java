@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         MenuInflater inflater = getMenuInflater();
 
-        inflater.inflate(R.menu.main_activity_actions, menu);
+        getMenuInflater().inflate(R.menu.menu_enter_info, menu);
 
         //Intent i = getIntent();
         //user1 = i.getParcelableExtra("userInput");
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         user1.setActivity(i.getStringExtra("activity"));*/
 
         //get the user object from enterInfo class
-        //user1 = getIntent().getParcelableExtra("userInput");
+        user1 = getIntent().getParcelableExtra("userInput");
         //user2 = new UserInfo(user1);
 /*
         user2 = new UserInfo();
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
     public void accelerometer(View view){
 
         Intent intent = new Intent(this, Accelerometer2.class);
-        //intent.putExtra("user", user1);
+        intent.putExtra("user", user1);
 
         startActivity(intent);
 

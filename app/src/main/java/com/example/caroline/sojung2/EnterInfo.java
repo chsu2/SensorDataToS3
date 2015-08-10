@@ -130,13 +130,13 @@ public class EnterInfo extends AppCompatActivity {
         //transferring the userInfo object to the MainActivity class
         intent.putExtra("userInput", userInput);
 
-        intent.putExtra("name", name.getText().toString());
+       /* intent.putExtra("name", name.getText().toString());
         intent.putExtra("gender", gender.getSelectedItem().toString());
         intent.putExtra("age", age.getSelectedItem().toString());
         intent.putExtra("inches", inches.getSelectedItem().toString());
         intent.putExtra("feet", feet.getSelectedItem().toString());
         intent.putExtra("weight", weight.getSelectedItem().toString());
-        intent.putExtra("activity", activity.getSelectedItem().toString());
+        intent.putExtra("activity", activity.getSelectedItem().toString());*/
 
         startActivity(intent);
 

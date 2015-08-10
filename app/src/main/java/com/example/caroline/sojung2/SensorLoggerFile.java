@@ -127,13 +127,13 @@ public class SensorLoggerFile {
                         e.printStackTrace();
                     }
                 }
-                header += "; Gender = "+ userGender +"\n";
-                header += "; Height = "+ userHeight +"\n";
-                header += "; Weight = "+ userWeight +"\n";
-                header += "; Age = "+ userAge +"\n";
-                header += "; Activity = "+userActivity+"\n";
-                header += "; Position = "+userPosition+"\n";
-                header += "; TruthStepCount = "+ userTruthStepCount +"\n";
+                header += "\n" + "; Gender = " + userGender +"\n";
+                header += "; Height = " + userHeight +"\n";
+                header += "; Weight = " + userWeight +"\n";
+                header += "; Age = " + userAge +"\n";
+                header += "; Activity = " + userActivity+"\n";
+                header += "; Position = " + userPosition+"\n";
+                header += "; TruthStepCount = " + userTruthStepCount +"\n";
                 header += "; currentActivity = " + activityString + "\n";
                 header += "; System.currentTimeMillis, event.timestamp, type, accuracy, values \n";
 

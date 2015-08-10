@@ -53,8 +53,8 @@ public class Accelerometer2 extends Activity implements SensorEventListener {
 
         }
 
-        //UserInfo user = intent.getParcelableExtra("user");
-        loggerFile = new SensorLoggerFile(this);
+        UserInfo user = getIntent().getParcelableExtra("user");
+        loggerFile = new SensorLoggerFile(this, user);
         //intent = getIntent();
 
 
