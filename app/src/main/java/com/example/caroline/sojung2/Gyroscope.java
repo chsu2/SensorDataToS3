@@ -34,7 +34,6 @@ public class Gyroscope extends Activity implements SensorEventListener {
     private TextView dataText;
     private ToggleButton dataRecordButton;
     private SensorLoggerFile loggerFile;
-   // private UserInfo user;
 
 
     @Override
@@ -46,8 +45,6 @@ public class Gyroscope extends Activity implements SensorEventListener {
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
-        //user = getIntent().getParcelableExtra("user");
-
         //saving the gyro to a local variable
         if (sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE) != null) {
             activeGyro = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
@@ -55,7 +52,9 @@ public class Gyroscope extends Activity implements SensorEventListener {
             dataText.setText("Gyroscope sensor is not present!");
             findViewById(R.id.recordData).setVisibility(View.GONE);
         }
-        loggerFile = new SensorLoggerFile(this);
+
+        UserInfo user = getIntent().getParcelableExtra("user");
+        loggerFile = new SensorLoggerFile(this, user);
     }
 
 
@@ -118,7 +117,7 @@ public class Gyroscope extends Activity implements SensorEventListener {
                     loggerFile.enableLogging();
 
                     Context context = getApplicationContext();
-                    CharSequence text = "I'm logging data!!!! Logging data";
+                    CharSequence text = "Logging data";
                     int duration = Toast.LENGTH_SHORT;
 
                     Toast toast = Toast.makeText(context, text, duration);

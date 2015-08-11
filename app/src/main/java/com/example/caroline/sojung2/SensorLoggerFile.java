@@ -119,9 +119,12 @@ public class SensorLoggerFile {
                         userGender = mUserProfile.getGender();
                         userHeight = String.format("%d",height);
                         userWeight = mUserProfile.getWeight();
-                        userAge = mUserProfile.getAge();
-                        userActivity = mUserProfile.getActivity();
-                        userPosition = mUserProfile.getOrientation();
+                        // changed //
+                        userAge = mUserProfile.getOrientation();
+                        //meow//
+                        userActivity = mUserProfile.getAge();
+                        //ckth// why are these flipped.....
+                        userPosition = mUserProfile.getActivity();
                         userTruthStepCount = "Check Last Entry";
                     } catch (NumberFormatException e) {
                         e.printStackTrace();

@@ -30,7 +30,6 @@ public class Accelerometer2 extends Activity implements SensorEventListener {
     private TextView dataText;
     private ToggleButton dataRecordButton;
     private SensorLoggerFile loggerFile;
-    //private Intent intent;
 
 
     /** Called when the activity i first created. */
@@ -55,9 +54,6 @@ public class Accelerometer2 extends Activity implements SensorEventListener {
 
         UserInfo user = getIntent().getParcelableExtra("user");
         loggerFile = new SensorLoggerFile(this, user);
-        //intent = getIntent();
-
-
 
 
 
@@ -111,7 +107,7 @@ public class Accelerometer2 extends Activity implements SensorEventListener {
                     loggerFile.enableLogging();
 
                     Context context = getApplicationContext();
-                    CharSequence text = "I'm logging data!!!! Logging data";
+                    CharSequence text = "Logging data";
                     int duration = Toast.LENGTH_SHORT;
 
                     Toast toast = Toast.makeText(context, text, duration);

@@ -3,10 +3,12 @@ package com.example.caroline.sojung2;
 /**
  * Created by Caroline on 7/29/15.
  */
+import android.content.Intent;
 import android.hardware.SensorEvent;
 import android.hardware.TriggerEvent;
 import android.location.Location;
 
+import java.lang.Integer;
 import java.io.File;
 import java.io.IOException;
 
@@ -54,6 +56,29 @@ public class SensorEventLogger extends DataWriter {
 
     public void log(long ts, int sensorType, int accuracy, float[] values) throws IOException {
         sStringBuilder.setLength(0);
+/** not sure if this method of recording data would be more effective. makes it easier visually to see the different sesor data.
+ * but in terms of parsing the document, i don't think it would be more effective
+
+        String[] sensors = new String[100];
+        for (int i = 0; i < sensors.length; i++) sensors[i] = mDelimiter;
+
+        sensors [(sensorType - 1) * 10] = ((Long)System.currentTimeMillis()).toString();
+
+        sensors [((sensorType - 1) * 10) + 2] = ((Long)ts).toString();
+
+        sensors [((sensorType - 1) * 10)+ 4] = ((Integer)sensorType).toString();
+
+        sensors [((sensorType - 1) * 10) + 6] = ((Integer)accuracy).toString();
+
+        for (int i = 0; i < values.length; i++) {
+
+            sensors [((sensorType - 1) * 10) + 6 + (i +1)*2] = ((Float) values[i]).toString();
+        }
+
+        for (int i = 0; i < sensors.length; i++){
+            sStringBuilder.append(sensors[i]);
+        }*/
+
 
         // System timestamp
         sStringBuilder.append(System.currentTimeMillis());
@@ -75,6 +100,7 @@ public class SensorEventLogger extends DataWriter {
             sStringBuilder.append(mDelimiter);
             sStringBuilder.append(values[i]);
         }
+
         writeln(sStringBuilder.toString());
     }
 

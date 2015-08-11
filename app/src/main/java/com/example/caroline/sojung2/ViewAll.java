@@ -50,9 +50,9 @@ public class ViewAll extends Activity implements SensorEventListener {
         gyroDataText = (TextView)findViewById(R.id.gyroData);
         magDataText = (TextView)findViewById(R.id.magData);
         stepText = (TextView)findViewById(R.id.stepData);
-        //user = getIntent().getParcelableExtra("user");
 
-        loggerFile = new SensorLoggerFile(this);
+        UserInfo user = getIntent().getParcelableExtra("user");
+        loggerFile = new SensorLoggerFile(this, user);
         dataRecordButton = (ToggleButton)findViewById(R.id.recordData);
 
 

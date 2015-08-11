@@ -115,11 +115,11 @@ public class EnterInfo extends AppCompatActivity {
 
     public void sensorChoice(View view){
 
-        /*fills the userInput object with the information the
+        /*fills the userInput object with the information the`
         user filled out */
         userInput.setName(name.getText().toString());
         userInput.setGender(gender.getSelectedItem().toString());
-        userInput.setAge(age.getSelectedItem().toString());
+       userInput.setAge(age.getSelectedItem().toString());
         userInput.setHeightIn(inches.getSelectedItem().toString());
         userInput.setHeightFt(feet.getSelectedItem().toString());
         userInput.setWeight(weight.getSelectedItem().toString());
@@ -129,14 +129,6 @@ public class EnterInfo extends AppCompatActivity {
 
         //transferring the userInfo object to the MainActivity class
         intent.putExtra("userInput", userInput);
-
-       /* intent.putExtra("name", name.getText().toString());
-        intent.putExtra("gender", gender.getSelectedItem().toString());
-        intent.putExtra("age", age.getSelectedItem().toString());
-        intent.putExtra("inches", inches.getSelectedItem().toString());
-        intent.putExtra("feet", feet.getSelectedItem().toString());
-        intent.putExtra("weight", weight.getSelectedItem().toString());
-        intent.putExtra("activity", activity.getSelectedItem().toString());*/
 
         startActivity(intent);
 

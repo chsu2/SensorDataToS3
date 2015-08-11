@@ -33,7 +33,6 @@ public class MagField extends Activity implements SensorEventListener {
     private TextView dataText;
     private ToggleButton dataRecordButton;
     private SensorLoggerFile loggerFile;
-    //private UserInfo user;
 
 
     @Override
@@ -45,8 +44,6 @@ public class MagField extends Activity implements SensorEventListener {
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
-       // user = getIntent().getParcelableExtra("user");
-
         //saving the magfield to a local variable
         if (sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) != null) {
             activeMag = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
@@ -55,7 +52,9 @@ public class MagField extends Activity implements SensorEventListener {
             findViewById(R.id.recordData).setVisibility(View.GONE);
         }
 
-        loggerFile = new SensorLoggerFile(this);
+        UserInfo user = getIntent().getParcelableExtra("user");
+
+        loggerFile = new SensorLoggerFile(this, user);
 
     }
 
@@ -103,7 +102,7 @@ public class MagField extends Activity implements SensorEventListener {
         String y = "Y coordinate: " + Float.toString(values[1]) + "\n";
         String z = "Z coordinate: " + Float.toString(values[2]) + "\n";
 
-        String coordinates = "Magnetic Field Data:\n" + x + y + z;
+        String coordinates = x + y + z;
 
         dataText.setText(coordinates);
 
@@ -117,7 +116,7 @@ public class MagField extends Activity implements SensorEventListener {
                     loggerFile.enableLogging();
 
                     Context context = getApplicationContext();
-                    CharSequence text = "I'm logging data!!!! Logging data";
+                    CharSequence text = "Logging data";
                     int duration = Toast.LENGTH_SHORT;
 
                     Toast toast = Toast.makeText(context, text, duration);
