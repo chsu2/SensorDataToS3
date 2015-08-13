@@ -14,6 +14,8 @@ import com.amazonaws.mobileconnectors.s3.transferutility.TransferType;
 /**
  * Created by Caroline on 8/4/15.
  */
+
+//uploads the file to the s3 bucket specified
 public class UploadFile {
 
     private TransferUtility transferUtility;
@@ -23,7 +25,7 @@ public class UploadFile {
 
         this.context = context;
 
-        //initialize transferUtility
+        //initialize transferUtility -- needed to transfer the file to the cloud -- no longer user transferManager
         transferUtility = Util.getTransferUtility(context);
 
     }

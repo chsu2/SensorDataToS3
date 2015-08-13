@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Created by Caroline on 8/4/15.
+ * edited by Caroline on 8/4/15.
  */
 public class SensorLoggerFile {
 
@@ -50,6 +50,7 @@ public class SensorLoggerFile {
 
     private static Context context;
 
+    //constructors
     public SensorLoggerFile(Context context){
 
         //assign values to the booleans
@@ -59,6 +60,7 @@ public class SensorLoggerFile {
 
     }
 
+    //constructor that sets the user information with the user inputs
     public SensorLoggerFile(Context context, UserInfo user){
 
         //assign values to the booleans
@@ -66,6 +68,7 @@ public class SensorLoggerFile {
         mAlgoithmLastPointLogged = false;
         this.context = context;
 
+        //set the user information
         mUserProfile = user;
     }
 
@@ -86,7 +89,7 @@ public class SensorLoggerFile {
             }
             try {
 
-                //create the mUserProfile if not already made
+                //sets the file name and allows it to be written to
                 SimpleDateFormat dateF = new SimpleDateFormat("MMdd-HHmm-ss");
                 Date date = new Date();
                 final String filename = DATA_LOG_PREFIX + String.valueOf(dateF.format(date)) + DATA_LOG_EXT;
@@ -97,7 +100,7 @@ public class SensorLoggerFile {
                 activityString = "Pedometer Calorie and Distance Counter";
                 String header = "Header1234";
 
-                //set all the strings to null
+                //initially set all the strings to null
                 String userGender = null;
                 String userHeight = null;
                 String userWeight = null;
@@ -119,12 +122,15 @@ public class SensorLoggerFile {
                         userGender = mUserProfile.getGender();
                         userHeight = String.format("%d",height);
                         userWeight = mUserProfile.getWeight();
+
                         // changed //
                         userAge = mUserProfile.getOrientation();
                         //meow//
                         userActivity = mUserProfile.getAge();
                         //ckth// why are these flipped.....
                         userPosition = mUserProfile.getActivity();
+                        // annoying..//
+
                         userTruthStepCount = "Check Last Entry";
                     } catch (NumberFormatException e) {
                         e.printStackTrace();

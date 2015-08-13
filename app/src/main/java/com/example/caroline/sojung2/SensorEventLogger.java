@@ -1,7 +1,7 @@
 package com.example.caroline.sojung2;
 
 /**
- * Created by Caroline on 7/29/15.
+ * edited by Caroline on 7/29/15.
  */
 import android.content.Intent;
 import android.hardware.SensorEvent;
@@ -42,6 +42,7 @@ public class SensorEventLogger extends DataWriter {
         write(header);
     }
 
+    //logging methods for different events
     public void log(SensorEvent event) throws IOException {
         log(event.timestamp, event.sensor.getType(), event.accuracy, event.values);
     }
@@ -50,35 +51,9 @@ public class SensorEventLogger extends DataWriter {
         log(event.timestamp, event.sensor.getType(), 0, event.values);
     }
 
-
-/*****************************
- * edit this logging function*/
-
+    //logger method to write data into the file
     public void log(long ts, int sensorType, int accuracy, float[] values) throws IOException {
         sStringBuilder.setLength(0);
-/** not sure if this method of recording data would be more effective. makes it easier visually to see the different sesor data.
- * but in terms of parsing the document, i don't think it would be more effective
-
-        String[] sensors = new String[100];
-        for (int i = 0; i < sensors.length; i++) sensors[i] = mDelimiter;
-
-        sensors [(sensorType - 1) * 10] = ((Long)System.currentTimeMillis()).toString();
-
-        sensors [((sensorType - 1) * 10) + 2] = ((Long)ts).toString();
-
-        sensors [((sensorType - 1) * 10)+ 4] = ((Integer)sensorType).toString();
-
-        sensors [((sensorType - 1) * 10) + 6] = ((Integer)accuracy).toString();
-
-        for (int i = 0; i < values.length; i++) {
-
-            sensors [((sensorType - 1) * 10) + 6 + (i +1)*2] = ((Float) values[i]).toString();
-        }
-
-        for (int i = 0; i < sensors.length; i++){
-            sStringBuilder.append(sensors[i]);
-        }*/
-
 
         // System timestamp
         sStringBuilder.append(System.currentTimeMillis());
@@ -101,10 +76,10 @@ public class SensorEventLogger extends DataWriter {
             sStringBuilder.append(values[i]);
         }
 
+        //writes line into file
         writeln(sStringBuilder.toString());
     }
 
-    /**********************************/
 
     public void log(Location location) throws IOException {
         sStringBuilder.setLength(0);
@@ -130,7 +105,7 @@ public class SensorEventLogger extends DataWriter {
         sStringBuilder.append(mDelimiter);
         sStringBuilder.append(location.getLongitude());
 
-
+        //writes line into the file
         writeln(sStringBuilder.toString());
     }
 

@@ -1,8 +1,5 @@
 package com.example.caroline.sojung2;
 
-/**
- * Created by Caroline on 8/4/15.
- */
 
 import android.content.Context;
 import android.net.Uri;
@@ -97,51 +94,6 @@ public class Util {
         }
     }
 
-    /**
-     * Copies the data from the passed in Uri, to a new file for use with the
-     * Transfer Service
-     *
-     * @param context
-     * @param uri
-     * @return
-     * @throws IOException
-     */
-    public static File copyContentUriToFile(Context context, Uri uri) throws IOException {
-        InputStream is = context.getContentResolver().openInputStream(uri);
-        File copiedData = new File(context.getDir("SampleImagesDir", Context.MODE_PRIVATE), UUID
-                .randomUUID().toString());
-        copiedData.createNewFile();
-
-        FileOutputStream fos = new FileOutputStream(copiedData);
-        byte[] buf = new byte[2046];
-        int read = -1;
-        while ((read = is.read(buf)) != -1) {
-            fos.write(buf, 0, read);
-        }
-
-        fos.flush();
-        fos.close();
-
-        return copiedData;
-    }
-
-    /*
-     * Fills in the map with information in the observer so that it can be used
-     * with a SimpleAdapter to populate the UI
-     */
-    public static void fillMap(Map<String, Object> map, TransferObserver observer, boolean isChecked) {
-        int progress = (int) ((double) observer.getBytesTransferred() * 100 / observer
-                .getBytesTotal());
-        map.put("id", observer.getId());
-        map.put("checked", isChecked);
-        map.put("fileName", observer.getAbsoluteFilePath());
-        map.put("progress", progress);
-        map.put("bytes",
-                getBytesString(observer.getBytesTransferred()) + "/"
-                        + getBytesString(observer.getBytesTotal()));
-        map.put("state", observer.getState());
-        map.put("percentage", progress + "%");
-    }
 }
 
 

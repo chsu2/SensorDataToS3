@@ -63,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
     public void accelerometer(View view){
 
         Intent intent = new Intent(this, Accelerometer2.class);
+
+        //adds the userInfo object to the next activity
         intent.putExtra("user", user1);
 
         startActivity(intent);
@@ -73,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
     public void gyroscope(View view){
 
         Intent intent = new Intent(this, Gyroscope.class);
+
+        //adds the userInfo object to the next activity
         intent.putExtra("user", user1);
 
         startActivity(intent);
@@ -82,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
     public void magField(View view){
 
         Intent intent = new Intent(this, MagField.class);
+
+        //adds the userInfo object to the next activity
         intent.putExtra("user", user1);
 
         startActivity(intent);
@@ -91,6 +97,8 @@ public class MainActivity extends AppCompatActivity {
     public void stepCounter(View view){
 
         Intent intent = new Intent(this, StepCounter.class);
+
+        //adds the userInfo object to the next activity
         intent.putExtra("user", user1);
 
         startActivity(intent);
@@ -101,6 +109,8 @@ public class MainActivity extends AppCompatActivity {
     public void viewAll(View view){
 
         Intent intent = new Intent(this, ViewAll.class);
+
+        //adds the userInfo object to the next activity
         intent.putExtra("user", user1);
 
         startActivity(intent);
