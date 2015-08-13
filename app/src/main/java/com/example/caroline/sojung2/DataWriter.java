@@ -3,13 +3,14 @@ package com.example.caroline.sojung2;
 /**
  * Created by Caroline on 7/29/15.
  */
-import android.media.MediaScannerConnection;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+
+//Writes the data frome the sensors into a file
 public class DataWriter {
 
     protected static final String TAG = "DataWriter";
@@ -22,16 +23,16 @@ public class DataWriter {
     private boolean mIsOpen = false;
 
 
+    //constructor
     public DataWriter(File dir) {
         mDir = dir;
     }
 
+
     public void open(String filename, boolean append) throws IOException {
         mAppend = append;
 
-        if (mIsOpen) {
-            close();
-        }
+        if (mIsOpen) close();
 
         File file = new File(mDir, filename);
 
@@ -50,10 +51,12 @@ public class DataWriter {
                 throw new IOException("Error opening writer", e);
             }
         }
+
         mFile = file;
         mFilename = filename;
         mIsOpen = true;
     }
+
 
     public void write(String data) throws IOException {
         if (mBufferedWriter == null) {
@@ -68,6 +71,7 @@ public class DataWriter {
         }
     }
 
+    //writes the line of data from the parameter
     public void writeln(String data) throws IOException {
         try {
             write(data);
@@ -77,6 +81,7 @@ public class DataWriter {
         }
     }
 
+    //writes an empty line
     public void writeln() throws IOException {
         try {
             mBufferedWriter.newLine();
@@ -85,6 +90,7 @@ public class DataWriter {
         }
     }
 
+    //closes the file so it can be written
     public void close() throws IOException {
         //Log.d("DataWriter", "close() mFilename: " + mFilename + ", mIsOpen: " + String.valueOf(mIsOpen));
         if ((mBufferedWriter != null) && (mIsOpen)) {
@@ -97,7 +103,6 @@ public class DataWriter {
             }
         }
         mIsOpen = false;
-
     }
 
     protected boolean setupFile(File file) throws IOException {

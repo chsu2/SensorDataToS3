@@ -20,13 +20,12 @@ public class MainActivity extends AppCompatActivity {
 
     private UserInfo user1;
 
-    public final static String EXTRA_MESSAGE = "com.example.caroline.sojung2.MESSAGE";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sensor_choice);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -40,9 +39,8 @@ public class MainActivity extends AppCompatActivity {
         user1 = getIntent().getParcelableExtra("userInput");
 
         return super.onCreateOptionsMenu(menu);
-
-
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -61,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+    //accelerometer button onClick method
     public void accelerometer(View view){
 
         Intent intent = new Intent(this, Accelerometer2.class);
@@ -70,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //gyroscope button onClick method
     public void gyroscope(View view){
 
         Intent intent = new Intent(this, Gyroscope.class);
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
+    //magnetic field button onClick method
     public void magField(View view){
 
         Intent intent = new Intent(this, MagField.class);
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
+    //step counter button onClick method
     public void stepCounter(View view){
 
         Intent intent = new Intent(this, StepCounter.class);
@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //viewAll button onClick method
     public void viewAll(View view){
 
         Intent intent = new Intent(this, ViewAll.class);

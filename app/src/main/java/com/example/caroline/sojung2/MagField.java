@@ -39,9 +39,12 @@ public class MagField extends Activity implements SensorEventListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mag_field);
+
+        //finding the toggle button and text in order to manipulate later
         dataText = (TextView)findViewById(R.id.magData);
         dataRecordButton = (ToggleButton)findViewById(R.id.recordData);
 
+        //allows you to find the sensor you would like and the state it is in
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
         //saving the magfield to a local variable
@@ -52,8 +55,10 @@ public class MagField extends Activity implements SensorEventListener {
             findViewById(R.id.recordData).setVisibility(View.GONE);
         }
 
+        //getting the user input information from the first activity
         UserInfo user = getIntent().getParcelableExtra("user");
 
+        //allows logging of data
         loggerFile = new SensorLoggerFile(this, user);
 
     }
@@ -84,8 +89,8 @@ public class MagField extends Activity implements SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent event) {
 
-        //interact with anything that wants to get sensor data
-        if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
+    //retrieves sensor data if the sensor is present
+       if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
             getMag(event);
         }else {
             dataText.setText("Magnetic Field sensor is not present!");
@@ -108,20 +113,18 @@ public class MagField extends Activity implements SensorEventListener {
 
         if (loggerFile.getmLogger()) loggerFile.tryLogging(event);
 
+        //defining what happens when the toggleButton is enabled and disabled
         dataRecordButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
 
+                    //start logging
                     loggerFile.enableLogging();
 
-                    Context context = getApplicationContext();
-                    CharSequence text = "Logging data";
-                    int duration = Toast.LENGTH_SHORT;
-
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
                 } else {
+
+                    //stop logging
                     loggerFile.disableLogging();
 
 

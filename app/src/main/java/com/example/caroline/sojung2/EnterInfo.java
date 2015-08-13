@@ -10,7 +10,9 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-/** allows the user to input their personal information
+/** opening activity
+ *
+ * allows the user to input their personal information
  *
  */
 public class EnterInfo extends AppCompatActivity {
@@ -18,10 +20,10 @@ public class EnterInfo extends AppCompatActivity {
     //instance variables
     private EditText name;
     private Spinner gender;
-    private Spinner age;
-    private Spinner feet;
-    private Spinner inches;
-    private Spinner weight;
+    private EditText age;
+    private EditText feet;
+    private EditText inches;
+    private EditText weight;
     private Spinner activity;
 
     protected UserInfo userInput;
@@ -43,44 +45,15 @@ public class EnterInfo extends AppCompatActivity {
         genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         gender.setAdapter(genderAdapter);
 
-        //age array
-        String[] ageValues = new String[99];
-        for (int i = 0; i < 99; i++) ageValues[i] = Integer.toString(i + 1);
+        //age input
+        age = (EditText)findViewById(R.id.ageSelect);
 
+        //height input
+        feet = (EditText)findViewById(R.id.feet);
+        inches = (EditText)findViewById(R.id.inches);
 
-        //age spinners
-        age = (Spinner)findViewById(R.id.ageSelect);
-        ArrayAdapter<String> ageAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, ageValues);
-        ageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        age.setAdapter(ageAdapter);
-
-
-        //height spinners
-        feet = (Spinner)findViewById(R.id.feet);
-        inches = (Spinner)findViewById(R.id.inches);
-
-        ArrayAdapter<CharSequence> feetAdapter = ArrayAdapter.createFromResource(this, R.array.feet_array,
-                android.R.layout.simple_spinner_item);
-        feetAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        feet.setAdapter(feetAdapter);
-
-        ArrayAdapter<CharSequence> inchAdapter = ArrayAdapter.createFromResource(this, R.array.inch_array,
-                android.R.layout.simple_spinner_item);
-        inchAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        inches.setAdapter(inchAdapter);
-
-        //weight array
-        String[] weightValues = new String[250];
-        for (int i = 0; i < 250; i++) weightValues[i] = Integer.toString(i + 50);
-
-
-        //Weight spinner
-        weight = (Spinner)findViewById(R.id.weightSelect);
-        ArrayAdapter<String> weightAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, weightValues);
-        weightAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        weight.setAdapter(weightAdapter);
+        //Weight input
+        weight = (EditText)findViewById(R.id.weightSelect);
 
         //activity spinner
         activity = (Spinner)findViewById(R.id.activitySelect);
@@ -88,7 +61,6 @@ public class EnterInfo extends AppCompatActivity {
                 android.R.layout.simple_spinner_item);
         activityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         activity.setAdapter(activityAdapter);
-
     }
 
     @Override
@@ -113,16 +85,17 @@ public class EnterInfo extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //called when the "enter" button is pressed
     public void sensorChoice(View view){
 
         /*fills the userInput object with the information the`
         user filled out */
         userInput.setName(name.getText().toString());
         userInput.setGender(gender.getSelectedItem().toString());
-       userInput.setAge(age.getSelectedItem().toString());
-        userInput.setHeightIn(inches.getSelectedItem().toString());
-        userInput.setHeightFt(feet.getSelectedItem().toString());
-        userInput.setWeight(weight.getSelectedItem().toString());
+        userInput.setAge(age.getText().toString());
+        userInput.setHeightIn(inches.getText().toString());
+        userInput.setHeightFt(feet.getText().toString());
+        userInput.setWeight(weight.getText().toString());
         userInput.setActivity(activity.getSelectedItem().toString());
 
         Intent intent = new Intent(this, MainActivity.class);

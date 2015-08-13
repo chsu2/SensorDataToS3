@@ -2,16 +2,12 @@ package com.example.caroline.sojung2;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
+
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.location.Location;
-import android.media.MediaScannerConnection;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,12 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-//fix writing into file
-
+/**displays the gyroscope data
+ *
+ */
 
 public class Gyroscope extends Activity implements SensorEventListener {
 
@@ -40,12 +33,15 @@ public class Gyroscope extends Activity implements SensorEventListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gyroscope);
+
+        //finding the toggle button and text in order to manipulate later
         dataText = (TextView)findViewById(R.id.textView);
         dataRecordButton = (ToggleButton)findViewById(R.id.recordData);
 
+        //allows you to find the sensor you would like and the state it is in
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
-        //saving the gyro to a local variable
+        //saving the gyro to a local variable in order to gather data later
         if (sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE) != null) {
             activeGyro = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
         } else {
@@ -53,7 +49,10 @@ public class Gyroscope extends Activity implements SensorEventListener {
             findViewById(R.id.recordData).setVisibility(View.GONE);
         }
 
+        //getting the user input information from the first activity
         UserInfo user = getIntent().getParcelableExtra("user");
+
+        //allows logging of data
         loggerFile = new SensorLoggerFile(this, user);
     }
 
@@ -83,8 +82,8 @@ public class Gyroscope extends Activity implements SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent event) {
 
-        //interact with anything that wants to get sensor data
-        if (event.sensor.getType() == Sensor.TYPE_GYROSCOPE) {
+         //retrieves sensor data if the sensor is present
+         if (event.sensor.getType() == Sensor.TYPE_GYROSCOPE) {
             getGyroscope(event);
 
         }else {
@@ -109,20 +108,18 @@ public class Gyroscope extends Activity implements SensorEventListener {
 
         if (loggerFile.getmLogger()) loggerFile.tryLogging(event);
 
+        //defining what happens when the toggleButton is enabled and disabled
         dataRecordButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
 
+                    //log data
                     loggerFile.enableLogging();
 
-                    Context context = getApplicationContext();
-                    CharSequence text = "Logging data";
-                    int duration = Toast.LENGTH_SHORT;
-
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
                 } else {
+
+                    //stop logging data
                     loggerFile.disableLogging();
 
                 }
@@ -140,7 +137,6 @@ public class Gyroscope extends Activity implements SensorEventListener {
     protected void onResume() {
         super.onResume();
         // register this class as a listener for the orientation and
-        // accelerometer sensors
         sensorManager.registerListener(this, activeGyro, SensorManager.SENSOR_DELAY_NORMAL);
     }
 

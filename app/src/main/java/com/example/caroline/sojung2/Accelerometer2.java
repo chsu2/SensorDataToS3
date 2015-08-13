@@ -32,18 +32,21 @@ public class Accelerometer2 extends Activity implements SensorEventListener {
     private SensorLoggerFile loggerFile;
 
 
-    /** Called when the activity i first created. */
+    /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accelerometer2);
+
+        //finding the toggle button and text in order to manipulate later
         dataText = (TextView)findViewById(R.id.textView);
         dataRecordButton = (ToggleButton)findViewById(R.id.recordData);
 
+        //allows you to find the sensor you would like and the state it is in
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
-        //saving the accel to a local variable
+        //saving the accel to a local variable in order to gather data later
         if (sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null) {
             activeAccel = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         } else {
@@ -52,13 +55,17 @@ public class Accelerometer2 extends Activity implements SensorEventListener {
 
         }
 
+        //getting the user input information from the first activity
         UserInfo user = getIntent().getParcelableExtra("user");
+
+        //allows logging of data
         loggerFile = new SensorLoggerFile(this, user);
 
 
 
         //check to see what sensors are enabled after declaring sensorManager
-        //keep local copy of sensor trying to use. use getDefaultSensor method that will retrieve a copy of sensor class to access members
+        //keep local copy of sensor trying to use. use getDefaultSensor method
+        //that will retrieve a copy of sensor class to access members
         //registerListener to get data from sensors
 
     }
@@ -73,7 +80,7 @@ public class Accelerometer2 extends Activity implements SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent event) {
 
-        //interact with anything that wants to get sensor data
+        //retrieves sensor data if the sensor is present
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             getAccelerometer(event);
         } else {
@@ -96,31 +103,27 @@ public class Accelerometer2 extends Activity implements SensorEventListener {
         dataText.setText(coordinates);
 
 
-        //can potentially move this line into the button clicking event
         if (loggerFile.getmLogger()) loggerFile.tryLogging(event);
 
+        //defining what happens when the toggleButton is enabled and disabled
         dataRecordButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
 
+                    //log data
                     loggerFile.enableLogging();
 
-                    Context context = getApplicationContext();
-                    CharSequence text = "Logging data";
-                    int duration = Toast.LENGTH_SHORT;
-
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
                 } else {
+
+                    //stop logging data
                     loggerFile.disableLogging();
 
-
                 }
-
             }
         });
     }
+
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {

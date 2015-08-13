@@ -23,18 +23,18 @@ public class StepCounter extends Activity implements SensorEventListener {
     private TextView dataText;
     private ToggleButton dataRecordButton;
     private SensorLoggerFile loggerFile;
-    private UserInfo user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_step_counter);
+
+        //finding the toggle button and text in order to manipulate later
         dataText = (TextView)findViewById(R.id.textView);
         dataRecordButton = (ToggleButton)findViewById(R.id.recordData);
 
+        //allows you to find the sensor you would like and the state it is in
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-
-        user = getIntent().getParcelableExtra("user");
 
         //saving the stepCounter to a local variable
         if (sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null) {
@@ -44,6 +44,10 @@ public class StepCounter extends Activity implements SensorEventListener {
             findViewById(R.id.recordData).setVisibility(View.GONE);
         }
 
+        //getting the user input information from the first activity
+        UserInfo user = getIntent().getParcelableExtra("user");
+
+        //allows logging of data
         loggerFile = new SensorLoggerFile(this, user);
 
     }
@@ -73,9 +77,12 @@ public class StepCounter extends Activity implements SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent event) {
 
-        //interact with anything that wants to get sensor data
+        //retrieves sensor data if the sensor is present
         if (event.sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
             getStep(event);
+        } else {
+        dataText.setText("Step Counter sensor is not present!");
+            findViewById(R.id.recordData).setVisibility(View.GONE);
         }
 
     }
@@ -92,20 +99,18 @@ public class StepCounter extends Activity implements SensorEventListener {
 
         if (loggerFile.getmLogger()) loggerFile.tryLogging(event);
 
+        //defining what happens when the toggleButton is enabled and disabled
         dataRecordButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
 
+                    //start logging
                     loggerFile.enableLogging();
 
-                    Context context = getApplicationContext();
-                    CharSequence text = "I'm logging data!!!! Logging data";
-                    int duration = Toast.LENGTH_SHORT;
-
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
                 } else {
+
+                    //stop logging
                     loggerFile.disableLogging();
 
 
