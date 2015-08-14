@@ -123,19 +123,27 @@ public class SensorLoggerFile {
                         userHeight = String.format("%d",height);
                         userWeight = mUserProfile.getWeight();
 
-                        // changed //
+                        /**
+                         *
+                         */
+                        // changed // possibly because of the fact the userInfo is parcelable
                         userAge = mUserProfile.getOrientation();
                         //meow//
                         userActivity = mUserProfile.getAge();
-                        //ckth// why are these flipped.....
+                        //ckth//
                         userPosition = mUserProfile.getActivity();
                         // annoying..//
+                        /**
+                         *
+                         */
 
                         userTruthStepCount = "Check Last Entry";
                     } catch (NumberFormatException e) {
                         e.printStackTrace();
                     }
                 }
+
+                //set the header to the user input values
                 header += "\n" + "; Gender = " + userGender +"\n";
                 header += "; Height = " + userHeight +"\n";
                 header += "; Weight = " + userWeight +"\n";
@@ -162,8 +170,7 @@ public class SensorLoggerFile {
     /**
      * Disables the data logger, closes the file and notifies the system that a
      * new file is available
-     *
-     * put the amazon web service stuff in this function after the file is written
+     * also sends the file to the cloud
      */
     protected void disableLogging() {
         File f1 = null;
@@ -196,9 +203,7 @@ public class SensorLoggerFile {
 
         Toast.makeText(context, "File written", Toast.LENGTH_SHORT).show();
 
-        //figure out what the file that is saved to the phone is called
-        //try to upload the file just saved to the phone
-
+        //sends file to the cloud
         UploadFile toTheCloud = new UploadFile(context);
         toTheCloud.beginUpload(f2.getAbsolutePath());
 
@@ -206,7 +211,7 @@ public class SensorLoggerFile {
         mLoggingEnabled = false;
     }
 
-    //logging the sensor data outputs
+    //logging the sensor data outputs -- multiple different methods to cover everything
     public void tryLogging(SensorEvent event) {
         if (mLoggingEnabled) {
             try {

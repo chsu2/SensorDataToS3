@@ -111,6 +111,7 @@ public class UserInfo implements Parcelable {
         dest.writeString(Email);
     }
 
+    //allows the object to be passed through activities
     public static final Parcelable.Creator<UserInfo> CREATOR = new Parcelable.Creator<UserInfo>() {
 
         @Override

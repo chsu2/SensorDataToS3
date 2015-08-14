@@ -16,7 +16,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-
+/** shows the sensor data of all the sensors
+ * can send the data to the S3 bucket
+ *
+ */
 public class ViewAll extends Activity implements SensorEventListener {
 
     private SensorManager sensorManager;
@@ -36,27 +39,27 @@ public class ViewAll extends Activity implements SensorEventListener {
     private ToggleButton dataRecordButton;
     private SensorLoggerFile loggerFile;
 
-    //private UserInfo user;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_all);
 
+        //allows you to find the sensor you would like and the state it is in
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
+        //finding the toggle button and text in order to manipulate later
         accelDataText = (TextView)findViewById(R.id.accelData);
         gyroDataText = (TextView)findViewById(R.id.gyroData);
         magDataText = (TextView)findViewById(R.id.magData);
         stepText = (TextView)findViewById(R.id.stepData);
-
-        UserInfo user = getIntent().getParcelableExtra("user");
-        loggerFile = new SensorLoggerFile(this, user);
         dataRecordButton = (ToggleButton)findViewById(R.id.recordData);
 
+        //getting the user input information from the first activity
+        UserInfo user = getIntent().getParcelableExtra("user");
 
-
+        //allows logging of data
+        loggerFile = new SensorLoggerFile(this, user);
 
         //saving the sensors to local variables
         if (sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null) {
@@ -117,14 +120,13 @@ public class ViewAll extends Activity implements SensorEventListener {
             getAccelerometer(event);
 
 
-
         if (event.sensor.getType() == Sensor.TYPE_GYROSCOPE)
             getGyroscope(event);
 
 
-
         if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD)
             getMag(event);
+
 
         if (event.sensor.getType() == Sensor.TYPE_STEP_COUNTER)
             getStep(event);
@@ -149,20 +151,18 @@ public class ViewAll extends Activity implements SensorEventListener {
 
         if (loggerFile.getmLogger()) loggerFile.tryLogging(event);
 
+        //defining what happens when the toggleButton is enabled and disabled
         dataRecordButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
 
+                    //enable logging
                     loggerFile.enableLogging();
 
-                    Context context = getApplicationContext();
-                    CharSequence text = "I'm logging data!!!! Logging data";
-                    int duration = Toast.LENGTH_SHORT;
-
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
                 } else {
+
+                    //stop logging
                     loggerFile.disableLogging();
 
 
@@ -187,6 +187,7 @@ public class ViewAll extends Activity implements SensorEventListener {
 
         if (loggerFile.getmLogger()) loggerFile.tryLogging(event);
 
+        //defining what happens when the toggleButton is enabled and disabled
         dataRecordButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -194,12 +195,6 @@ public class ViewAll extends Activity implements SensorEventListener {
 
                     loggerFile.enableLogging();
 
-                    Context context = getApplicationContext();
-                    CharSequence text = "I'm logging data!!!! Logging data";
-                    int duration = Toast.LENGTH_SHORT;
-
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
                 } else {
                     loggerFile.disableLogging();
 
@@ -226,6 +221,7 @@ public class ViewAll extends Activity implements SensorEventListener {
 
         if (loggerFile.getmLogger()) loggerFile.tryLogging(event);
 
+        //defining what happens when the toggleButton is enabled and disabled
         dataRecordButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -233,12 +229,6 @@ public class ViewAll extends Activity implements SensorEventListener {
 
                     loggerFile.enableLogging();
 
-                    Context context = getApplicationContext();
-                    CharSequence text = "I'm logging data!!!! Logging data";
-                    int duration = Toast.LENGTH_SHORT;
-
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
                 } else {
                     loggerFile.disableLogging();
 
@@ -263,6 +253,7 @@ public class ViewAll extends Activity implements SensorEventListener {
 
         if (loggerFile.getmLogger()) loggerFile.tryLogging(event);
 
+        //defining what happens when the toggleButton is enabled and disabled
         dataRecordButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -270,12 +261,6 @@ public class ViewAll extends Activity implements SensorEventListener {
 
                     loggerFile.enableLogging();
 
-                    Context context = getApplicationContext();
-                    CharSequence text = "I'm logging data!!!! Logging data";
-                    int duration = Toast.LENGTH_SHORT;
-
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
                 } else {
                     loggerFile.disableLogging();
 
